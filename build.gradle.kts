@@ -7,8 +7,8 @@ plugins {
     id("org.flywaydb.flyway") version "9.3.1"
     id("org.springframework.boot") version "2.7.3"
     id("io.spring.dependency-management") version "1.0.14.RELEASE"
-    kotlin("jvm") version "1.5.0"
-    kotlin("plugin.spring") version "1.5.0"
+    kotlin("jvm") version "1.8.0"
+    kotlin("plugin.spring") version "1.8.0"
     application
     distribution
 }
@@ -53,7 +53,7 @@ flyway {
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "11"
+        jvmTarget = "15"
     }
 }
 

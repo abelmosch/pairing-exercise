@@ -9,9 +9,7 @@ import org.springframework.stereotype.Service
 @Service
 class CountryService(val dbCountry: CountryRepository, val dbCity: CityRepository, ) {
 
-    fun findCountries(): List<CountryResponse> {
-        return dbCountry.findCountries()
-    }
+    fun findCountries(): List<CountryResponse> = dbCountry.findCountries()
     fun findCities(countryCode: String): List<CityResponse> = dbCity.findByCountryCode(countryCode)
 
 }
