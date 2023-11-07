@@ -1,8 +1,11 @@
 package io.billie.functional.data
 
+import io.billie.payments.db.InvoiceEntity
+import io.billie.payments.db.PriceValue
+import java.math.BigDecimal
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
 import java.util.*
-import kotlin.collections.HashMap
 
 object Fixtures {
 
@@ -148,5 +151,25 @@ object Fixtures {
     }
 
 
+    fun invoiceEntity(merchantId: UUID, amount: BigDecimal) = InvoiceEntity(
+            id = UUID.randomUUID(),
+            buyerId = "some buyer ID",
+            merchantId = merchantId,
+            createdDate = LocalDateTime.now(),
+            orderId = "12312312",
+            totalInvoicePrice = PriceValue(amount, "USD"), updatedDate = LocalDateTime.now())
+
+    fun paymentReceipt(merchantId: UUID, id: UUID, amount: BigDecimal = BigDecimal(800)): String {
+        return "{\n" +
+                "  \"merchantId\": \"$merchantId\",\n" +
+                "  \"invoiceId\": \"$id\",\n" +
+                "  \"amount\": {\n" +
+                "    \"amount\": $amount,\n" +
+                "    \"currency\": \"USD\"\n" +
+                "  },\n" +
+                "  \"paymentType\": \"MERCHANT\",\n" +
+                "  \"createdDate\": \"2023-11-07T21:02:45.743Z\"\n" +
+                "}"
+    }
 
 }

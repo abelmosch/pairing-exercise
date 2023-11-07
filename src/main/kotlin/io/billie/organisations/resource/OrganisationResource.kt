@@ -1,6 +1,6 @@
 package io.billie.organisations.resource
 
-import io.billie.organisations.data.UnableToValidateOrganizationByCountry
+import io.billie.organisations.data.UnableToValidateOrganizationByCountryException
 import io.billie.organisations.service.OrganisationService
 import io.billie.organisations.viewmodel.*
 import io.swagger.v3.oas.annotations.media.ArraySchema
@@ -39,7 +39,7 @@ class OrganisationResource(val service: OrganisationService) {
         try {
             val id = service.createOrganisation(organisation)
             return Entity(id)
-        } catch (e: UnableToValidateOrganizationByCountry) {
+        } catch (e: UnableToValidateOrganizationByCountryException) {
             throw ResponseStatusException(BAD_REQUEST, e.message)
         }
     }

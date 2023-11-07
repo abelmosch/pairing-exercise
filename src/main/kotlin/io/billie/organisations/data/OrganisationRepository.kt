@@ -29,7 +29,7 @@ class OrganisationRepository {
     @Transactional
     fun create(organisation: OrganisationRequest): UUID {
         if(!valuesValid(organisation)) {
-            throw UnableToValidateOrganizationByCountry(organisation.countryCode)
+            throw UnableToValidateOrganizationByCountryException(organisation.countryCode)
         }
         val id: UUID = createContactDetails(organisation.contactDetails)
         return createOrganisation(organisation, id)
