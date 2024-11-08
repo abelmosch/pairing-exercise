@@ -19,7 +19,7 @@ import javax.validation.Valid
 class OrganizationController(private val service: OrganizationService) {
 
     @GetMapping
-    fun index(): List<OrganizationResponse> = service.findOrganizations()
+    fun organizations(): List<OrganizationResponse> = service.findOrganizations()
 
     @PostMapping
     @ApiResponses(
@@ -35,7 +35,7 @@ class OrganizationController(private val service: OrganizationService) {
             ),
             ApiResponse(responseCode = "400", description = "Bad request", content = [Content()])]
     )
-    fun post(@Valid @RequestBody organisation: OrganizationRequest): CreateOrganizationResponse {
+    fun createOrganization(@Valid @RequestBody organisation: OrganizationRequest): CreateOrganizationResponse {
         try {
             val organizationEntity = service.createOrganization(organisation)
             return CreateOrganizationResponse(organizationEntity.id)

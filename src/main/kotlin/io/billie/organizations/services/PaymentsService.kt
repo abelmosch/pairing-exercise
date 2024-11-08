@@ -2,7 +2,6 @@ package io.billie.organizations.services
 
 import io.billie.organizations.dto.PaymentReceiptRequest
 import io.billie.organizations.dto.PaymentReceiptResponse
-import io.billie.organizations.enities.PaymentReceiptEntity
 import io.billie.organizations.exceptions.ValidationException
 import io.billie.organizations.repositories.PaymentsRepository
 import mu.KotlinLogging
@@ -11,8 +10,9 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 class PaymentsService(
-        private val paymentsRepository: PaymentsRepository,
-        private val organizationService: OrganizationService) {
+    private val paymentsRepository: PaymentsRepository,
+    private val organizationService: OrganizationService
+) {
 
     private val logger = KotlinLogging.logger {}
 
@@ -43,25 +43,4 @@ class PaymentsService(
         }
         logger.info { "Validated! invoiceId: ${request.invoiceId} for id${organizationResponse.id} ${organizationResponse.name}" }
     }
-
-
-    private fun mapToPaymentReceiptEntity(request: PaymentReceiptRequest): PaymentReceiptEntity {
-        return PaymentReceiptEntity(
-                invoiceId = request.invoiceId,
-                amount = request.amount,
-                paymentType = request.paymentType,
-                createdDate = request.createdDate
-        )
-    }
-
-    private fun mapToPaymentReceiptResponse(updated: PaymentReceiptEntity): PaymentReceiptResponse {
-        return PaymentReceiptResponse(
-                id = updated.id,
-                amount = updated.amount,
-                invoiceId = updated.invoiceId,
-                paymentType = updated.paymentType,
-                createdDate = updated.createdDate
-        )
-    }
-
 }

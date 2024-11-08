@@ -17,7 +17,7 @@ import javax.validation.Valid
 
 @RestController
 @RequestMapping("payments")
-class PaymentsController(val service: PaymentsService) {
+class PaymentsController(private val service: PaymentsService) {
     @PostMapping
     @ApiResponses(
             value = [

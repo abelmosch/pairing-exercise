@@ -32,7 +32,7 @@ class CountryController(private val service: CountryService) {
                 )]
     )
     @GetMapping
-    fun index(): List<CountryResponse> = service.findCountries()
+    fun countries(): List<CountryResponse> = service.findCountries()
 
     @ApiResponses(
             value = [
